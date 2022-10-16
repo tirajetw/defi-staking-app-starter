@@ -8,7 +8,7 @@ require("chai")
   .use(require("chai-as-promised"))
   .should();
 
-contract("decentralBank", ({ owner, customer }) => {
+contract("decentralBank", ([ owner, customer ]) => {
   let rwd, tether, decentralBank;
 
   function tokens(number) {
