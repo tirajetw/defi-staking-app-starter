@@ -41,4 +41,16 @@ contract("decentralBank", ([ owner, customer ]) => {
       assert.equal(name, "Reward Token");
     });
   });
+
+  describe("Decentral Bank Deployment", async () => {
+    it("matches name successfully", async () => {
+      const name = await decentralBank.name();
+      assert.equal(name, "Decentral Bank");
+    });
+
+    it("contract has tokens", async () => {
+      let balance = await rwd.balanceOf(decentralBank.address);
+      assert.equal(balance.toString(), web3.utils.toWei("1000000"));
+    });
+  });
 });
