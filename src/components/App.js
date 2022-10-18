@@ -65,19 +65,7 @@ class App extends Component {
     this.setState({ loading: false });
   }
 
-  async loadWeb3() {
-    if (window.ethereum) {
-      window.web3 = new Web3(window.ethereum);
-      await window.ethereum.enable();
-    } else if (window.web3) {
-      window.web3 = new Web3(window.web3.currentProvider);
-    } else {
-      window.alert(
-        "Non ethereum browser detected. You should consider Metamask!"
-      );
-    }
-  }
-
+  // Stake Tokens (Deposit)
   stakeTokens = (amount) => {
     this.setState({ loading: true });
     this.state.tether.methods
@@ -93,6 +81,7 @@ class App extends Component {
       });
   };
 
+  // Unstake Tokens (Withdraw)
   unstakeTokens = () => {
     this.setState({ loading: true });
     this.state.decentralBank.methods
@@ -102,6 +91,19 @@ class App extends Component {
         this.setState({ loading: false });
       });
   };
+
+  async loadWeb3() {
+    if (window.ethereum) {
+      window.web3 = new Web3(window.ethereum);
+      await window.ethereum.enable();
+    } else if (window.web3) {
+      window.web3 = new Web3(window.web3.currentProvider);
+    } else {
+      window.alert(
+        "Non ethereum browser detected. You should consider Metamask!"
+      );
+    }
+  }
 
   constructor(props) {
     super(props);
@@ -137,6 +139,7 @@ class App extends Component {
               rwdBalance={this.state.rwdTokenBalance}
               stakingBalance={this.state.stakingBalance}
               stakeTokens={this.stakeTokens}
+                unstakeTokens={this.unstakeTokens}
             />
           ));
     }
